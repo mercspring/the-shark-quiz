@@ -11,15 +11,26 @@
 }
 
 .quiz-answer{
-    /* min-width: 100px; */
-    width: 100%;
     display: block;
-    margin: auto;
-    margin: 10% 0;
+    min-width: 5ch;
+    margin-bottom: 5px;
+    /* margin: auto; */
 }
 
-.column-1, .column-2{
+main{
+    padding-right: 50%;
+}
+#timer{
+    text-align: right;
+}
+.container{
+    padding: 10vw;
+}
+
+/* .column-1, .column-2{
     padding: 0px;
     margin-left: 10%;
-}
+} */
+
+
  

@@ -1,0 +1,25 @@
+ .btn-color{
+     background: khaki;
+ }
+
+ #question-heading{
+     display: none;
+ }
+
+.quiz{
+    display:none;
+}
+
+.quiz-answer{
+    /* min-width: 100px; */
+    width: 100%;
+    display: block;
+    margin: auto;
+    margin: 10% 0;
+}
+
+.column-1, .column-2{
+    padding: 0px;
+    margin-left: 10%;
+}
+ 

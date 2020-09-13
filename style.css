@@ -18,10 +18,23 @@ main{
     padding-right: 50%;
 }
 #timer{
-    text-align: right;
+}
+#initials-input{
+    width:10ch;
+}
+#submit{
+    margin-left: 1ch;
+}
+#show-leaders{
+
+}
+#try-again{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display:block;
 }
 .container{
-    padding: 10vw;
+    /* padding: 10vw; */
 }
 
 /* .column-1, .column-2{

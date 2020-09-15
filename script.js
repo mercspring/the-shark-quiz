@@ -36,10 +36,10 @@ function toggleLeaderboard() {
     console.log("button worked")
     if (document.querySelector("#high-scores ol") != null) {
         cleanUpLeaderboard();
-        document.querySelector("#show-leader").textContent = "Show Leaders"
+        // document.querySelector("#show-leader").textContent = "Show Leaders"
     } else {
         processLeaderboard();
-        document.querySelector("#show-leader").textContent = "Hide Leaders"
+        // document.querySelector("#show-leader").textContent = "Hide Leaders"
     }
 
 }
@@ -103,6 +103,7 @@ function cleanUpLeaderboard() {
         }
     }
 
+    document.querySelector("#show-leader").textContent = "Show Leaders"
 }
 
 function cleanUpQuiz() {
@@ -254,6 +255,7 @@ function addToLeaderboard(event) {
 
 function processLeaderboard() {
     cleanUpLeaderboard();
+    document.querySelector("#show-leader").textContent = "Hide Leaders"
     var heading = document.createElement("h4");
     var list = document.createElement("ol");
     if (localStorage.leaderboard != "") {

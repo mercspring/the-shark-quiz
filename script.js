@@ -113,6 +113,7 @@ function cleanUpQuiz() {
             document.querySelector("main *").remove();
         }
     }
+    document.querySelector("footer").innerHTML = "";
 
 }
 
@@ -180,6 +181,7 @@ function displayScores() {
     var input = document.createElement("input");
     var form = document.createElement("form");
     var instructions = document.createElement("p");
+    var footer = document.createElement("p");
 
     // Give Elements Info
     finalScore.setAttribute("class", "score current-score")
@@ -209,6 +211,9 @@ function displayScores() {
 
     form.setAttribute("class", "score");
 
+    footer.setAttribute("class", "score")
+    footer.innerHTML = "Information for this quiz was taken from <a href=https://www.sharksider.com/>sharksider.com</a>."
+
 
     // Add elements to page
     document.querySelector("main").appendChild(finalScore);
@@ -217,6 +222,7 @@ function displayScores() {
     document.querySelector("main").appendChild(input);
     document.querySelector("main").appendChild(toLeaderboardBtn);
     document.querySelector("main").appendChild(tryAgainBtn);
+    document.querySelector("footer").appendChild(footer);
 
 }
 
@@ -250,7 +256,7 @@ function processLeaderboard() {
     cleanUpLeaderboard();
     var heading = document.createElement("h4");
     var list = document.createElement("ol");
-    if (localStorage.leaders != "") {
+    if (localStorage.leaderboard != "") {
         leaderboard = JSON.parse(localStorage.getItem("leaderboard"));
     }
     list.setAttribute("class", "score");
@@ -258,7 +264,7 @@ function processLeaderboard() {
     heading.innerText = "Leaderboard";
     document.querySelector("#high-scores").appendChild(heading);
     document.querySelector("#high-scores").appendChild(list);
-    for (i = 0; i < leaderboard.length; i++) {
+    for (i = 0; i < 5; i++) {
         var listItem = document.createElement("li");
         console.log(listItem);
         console.log(leaderboard)

@@ -1,49 +1,70 @@
 body{
     background-image: url(./sharks.jpg);
+    background-repeat: no-repeat;
+    position: relative;
+    height: 100vh;
 }
-#home,#show-leader,#study,h4,p,ol{
+
+footer a{
+    color: black;
+    text-decoration: underline;
+}
+
+footer{
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+    display: block;
+}
+
+footer,#home,#show-leader,#study,h4,p,ol{
     color:white;
 }
 
 .question.quiz{
     margin-top: 10px;
 }
+
 p.quiz{
     padding-left: 3px;
 }
+
 .quiz{
     background: whitesmoke;
     color: black;
     border: 2px solid grey;
 }
 
-
 .quiz-answer{
     display: block;
     min-width: 5ch;
     margin-bottom: 5px;
-    /* margin: auto; */
 }
 
 main{
     padding-right: 50%;
     margin-bottom: 20px;
 }
+
 .align-timer{
     text-align: right;
 }
+
 #timer{
     font-size: large;
     background-color: white;
     border: 2pt ridge grey;
     padding: 2px;
 }
+
 #initials-input{
     width:10ch;
 }
+
 #submit{
     margin-left: 1ch;
 }
+
 #try-again{
     margin-top: 20px;
     margin-bottom: 20px;

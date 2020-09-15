@@ -64,7 +64,7 @@ function cleanUpTimer() {
 
 function welcome() {
     var welcomeHeading = document.createElement("h4");
-    welcomeHeading.innerText = "Welcome to my quiz";
+    welcomeHeading.innerText = "Welcome to the Shark Quiz";
     welcomeHeading.setAttribute("class", "welcome");
     var welcomeText = ["Please push the button to begin.", "Your final score is the time reamaining.", "Every question you get wrong subtracts 10 seconds.", "Good Luck!"]
     document.querySelector("main").appendChild(welcomeHeading);

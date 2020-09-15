@@ -1,11 +1,18 @@
-var questions = [{ questionText: "What color is my hair?", answers: ["Brown", "Red", "Blonde", "Gray"], correctAnswer: "Brown" },
-{ questionText: "What is my dogs name?", answers: ["Hex", "Dodo", "Hen", "Almond"], correctAnswer: "Dodo" },
-{ questionText: "What state do I live in?", answers: ["WA", "OR", "UT", "ID"], correctAnswer: "WA" }]
+var questions = [{ questionText: "How many bones does a shark have in it's body?", answers: ["0", "37", "95", "257"], correctAnswer: "0" },
+{ questionText: "What type of scales do sharks have?", answers: ["Cycloid", "Ganoid", "Placoid", "Cosmoid"], correctAnswer: "Placoid" },
+{ questionText: "How many teeth do sharks normally have?", answers: ["10-15", "20-25", "40-45", "100-150"], correctAnswer: "40-45" },
+{ questionText: "What is the oldest known living species of shark?", answers: ["Magalodon Shark", "Goblin Shark", "Porbeagle Shark", "Frilled Shark"], correctAnswer: "Goblin Shark" },
+{ questionText: "Do sharks hunt in packs?", answers: ["Yes", "No", "Sometimes"], correctAnswer: "Sometimes" },
+{ questionText: "How often do sharks sleep?", answers: ["Once a day", "Twice a day", "Sharks never sleep"], correctAnswer: "Sharks never sleep" },
+{ questionText: "How long are frilled sharks pregnant before giving birth?", answers: ["9 months", "2 years", "3 1/2 years", "5 years"], correctAnswer: "3 1/2 years" },
+{ questionText: "How many sharks are killed every year by humans?", answers: ["500,000", "1,000,000", "40,000,000", "100,000,000"], correctAnswer: "100,000,000" },
+{ questionText: "On average how much food does a great white shark eat every year?", answers: ["1 ton", "11 tons", "23 tons", "30 tons"], correctAnswer: "11 tons" },
+{ questionText: "Which of the following oceans don't have sharks?", answers: ["Pacific Ocean", "South Ocean", "Artic Ocean", "Atlantic Ocean", "Indian Ocean", "None of the above"], correctAnswer: "None of the above" }]
 
 // GLOBAL VARIBLES 
 var score = 0;
 var timeLimit = 75;
-var quizLength = 3;
+var quizLength = 6;
 var remainingQuestions = quizLength - 1;
 var quizQuesitons = generateQuestions(quizLength);
 var currentQuestion = quizQuesitons.shift();
@@ -29,8 +36,10 @@ function toggleLeaderboard() {
     console.log("button worked")
     if (document.querySelector("#high-scores ol") != null) {
         cleanUpLeaderboard();
+        document.querySelector("#show-leader").textContent = "Show Leaders"
     } else {
         processLeaderboard();
+        document.querySelector("#show-leader").textContent = "Hide Leaders"
     }
 
 }
@@ -40,6 +49,8 @@ function startTimer() {
         document.querySelector("#timer").innerText = --timer;
         if (timer <= 0) {
             cleanUpTimer();
+            cleanUp();
+            displayScores();
         }
     }, 1000)
 
@@ -71,15 +82,18 @@ function welcome() {
 
     document.querySelector("main").appendChild(button);
 }
+
 function startButton() {
     cleanUp();
     startTimer();
     populateQuiz();
 }
+
 function cleanUp() {
     cleanUpLeaderboard();
     cleanUpQuiz();
 }
+
 function cleanUpLeaderboard() {
     clearThis = document.querySelectorAll("#high-scores *").length;
     console.log(clearThis)
@@ -149,11 +163,11 @@ function quizButton(event) {
 function restart() {
 
     remainingQuestions = quizLength - 1;
-    console.log(remainingQuestions);
+    console.log("remaining questions", remainingQuestions);
     quizQuesitons = generateQuestions(quizLength);
-    console.log(quizQuesitons);
+    console.log("quiz questions", quizQuesitons);
     currentQuestion = quizQuesitons.shift();
-    console.log(currentQuestion);
+    console.log("current question", currentQuestion);
     timer = timeLimit;
 }
 
@@ -165,6 +179,7 @@ function displayScores() {
     var toLeaderboardBtn = document.createElement("button");
     var input = document.createElement("input");
     var form = document.createElement("form");
+    var instructions = document.createElement("p");
 
     // Give Elements Info
     finalScore.setAttribute("class", "score current-score")
@@ -178,7 +193,11 @@ function displayScores() {
     input.setAttribute("class", "score");
     input.setAttribute("id", "initials-input");
     input.setAttribute("type", "text");
-    input.setAttribute("value", "??");
+    input.setAttribute("value", "");
+
+    instructions.setAttribute("class", "score")
+    instructions.setAttribute("id", "instructions");
+    instructions.innerText = "Please add your initials and hit submit to add your score to the leaderboard"
 
     toLeaderboardBtn.setAttribute("class", "score btn-color")
     toLeaderboardBtn.setAttribute("id", "submit")
@@ -193,12 +212,14 @@ function displayScores() {
 
     // Add elements to page
     document.querySelector("main").appendChild(finalScore);
+    document.querySelector("main").appendChild(instructions);
     // document.querySelector("main").appendChild(form);
     document.querySelector("main").appendChild(input);
     document.querySelector("main").appendChild(toLeaderboardBtn);
     document.querySelector("main").appendChild(tryAgainBtn);
 
 }
+
 function checkForInput() {
     if (document.querySelector("#initials-input").value != "") {
         document.querySelector("#submit").disabled = false;
@@ -206,9 +227,18 @@ function checkForInput() {
         document.querySelector("#submit").disabled = true;
     }
 }
+
 function addToLeaderboard(event) {
-    event.preventDefault();
     initials = document.querySelector("#initials-input").value;
+
+    if (!initials || initials.length > 2) {
+
+        document.querySelector("#instructions").innerText = "Initials must be one or two characters"
+        return
+    }
+
+
+    event.preventDefault();
     console.log("inititials " + initials);
     document.querySelector("#submit").disabled = true;
     sortLeaderboard(initials);
@@ -218,8 +248,15 @@ function addToLeaderboard(event) {
 
 function processLeaderboard() {
     cleanUpLeaderboard();
+    var heading = document.createElement("h4");
     var list = document.createElement("ol");
+    if (localStorage.leaders != "") {
+        leaderboard = JSON.parse(localStorage.getItem("leaderboard"));
+    }
     list.setAttribute("class", "score");
+    heading.setAttribute("class", "score");
+    heading.innerText = "Leaderboard";
+    document.querySelector("#high-scores").appendChild(heading);
     document.querySelector("#high-scores").appendChild(list);
     for (i = 0; i < leaderboard.length; i++) {
         var listItem = document.createElement("li");
@@ -251,6 +288,7 @@ function sortLeaderboard(initials) {
             i++;
         }
     }
+    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
 
 
 }
@@ -268,7 +306,7 @@ function generateQuestions(length) {
     var i = length;
     var j;
     while (i > 0) {
-        j = randomWhole(length)
+        j = randomWhole(questions.length)
         if (quizItems.indexOf(j) === -1) {
             quizItems.push(j);
             i--;

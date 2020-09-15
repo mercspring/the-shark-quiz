@@ -1,10 +1,21 @@
- .btn-color{
-     background: khaki;
- }
+body{
+    background-image: url(./sharks.jpg);
+}
+#home,#show-leader,#study,h4,p,ol{
+    color:white;
+}
 
- #question-heading{
-     display: none;
- }
+.question.quiz{
+    margin-top: 10px;
+}
+p.quiz{
+    padding-left: 3px;
+}
+.quiz{
+    background: whitesmoke;
+    color: black;
+    border: 2px solid grey;
+}
 
 
 .quiz-answer{
@@ -17,7 +28,14 @@
 main{
     padding-right: 50%;
 }
+.align-timer{
+    text-align: right;
+}
 #timer{
+    font-size: large;
+    background-color: white;
+    border: 2pt ridge grey;
+    padding: 2px;
 }
 #initials-input{
     width:10ch;
@@ -25,22 +43,9 @@ main{
 #submit{
     margin-left: 1ch;
 }
-#show-leaders{
-
-}
 #try-again{
     margin-top: 20px;
     margin-bottom: 20px;
     display:block;
 }
-.container{
-    /* padding: 10vw; */
-}
-
-/* .column-1, .column-2{
-    padding: 0px;
-    margin-left: 10%;
-} */
-
-
  
